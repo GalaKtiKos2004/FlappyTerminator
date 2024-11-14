@@ -32,7 +32,6 @@ public class Game : MonoBehaviour
     {
         _endGameScreen.Open();
         Time.timeScale = 0;
-        _pipesPool.Clear();
     }
 
     private void OnPlayButtonClick()
@@ -44,6 +43,7 @@ public class Game : MonoBehaviour
     private void OnRestartButtonClick()
     {
         _endGameScreen.Close();
+        _pipesPool.Clear();
         StartGame();
     }
 
