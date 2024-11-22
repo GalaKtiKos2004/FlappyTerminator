@@ -2,18 +2,18 @@ using UnityEngine;
 
 public class PipeRemover : MonoBehaviour
 {
-    [SerializeField] private PipesPool _pool;
+    [SerializeField] private EnemysPool _pool;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out Pipe pipe))
+        if (collision.TryGetComponent(out Enemy enemy))
         {
-            if (pipe.gameObject.activeSelf == false) // MVP
+            if (enemy.gameObject.activeSelf == false) // MVP
             {
                 return;
             }
 
-            _pool.ReleasePipe(pipe);
+            _pool.ReleaseObjects(enemy);
         }
     }
 }

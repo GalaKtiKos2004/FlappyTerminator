@@ -37,7 +37,7 @@ public class Bird : MonoBehaviour
 
     private void Collision(IInteractable interactable)
     {
-        if (interactable is Pipe)
+        if (interactable is Enemy)
         {
             GameOver?.Invoke();
         }
