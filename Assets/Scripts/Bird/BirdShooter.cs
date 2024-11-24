@@ -26,5 +26,7 @@ public class BirdShooter : MonoBehaviour
     {
         Bullet bullet = _bulletPool.GetObjects();
         bullet.transform.position = transform.position;
+
+        bullet.ChangeDirection(transform.right);
     }
 }
