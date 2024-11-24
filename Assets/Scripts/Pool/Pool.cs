@@ -29,7 +29,7 @@ public abstract class Pool<T> : MonoBehaviour where T : PoolableObject<T>
 
     public void ReleaseObjects(T t)
     {
-        _pool.Release(t); 
+        _pool.Release(t);
     }
 
     public void Clear()

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -7,12 +8,14 @@ public class Enemy : PoolableObject<Enemy>, IInteractable
 
     private BulletPool _bulletPool;
 
+    public event Action<Enemy> Died;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out PlayerBullet _))
+        if (collision.TryGetComponent(out PlayerBullet bullet))
         {
-            Destroy(collision.gameObject);
-            Destroy(gameObject);
+            _bulletPool.ReleaseObjects(bullet);
+            Died?.Invoke(this);
         }
     }
 

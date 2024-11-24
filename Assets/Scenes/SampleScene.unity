@@ -933,6 +933,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bird: {fileID: 337268776}
   _enemysPool: {fileID: 1382525865}
+  _playerBullets: {fileID: 715875139}
+  _enemyBullets: {fileID: 151180611}
   _startScreen: {fileID: 2137577294}
   _endGameScreen: {fileID: 1823416297}
 --- !u!1 &606771071
