@@ -4,6 +4,8 @@ public class Game : MonoBehaviour
 {
     [SerializeField] private Bird _bird;
     [SerializeField] private Pool<Enemy> _enemysPool;
+    [SerializeField] private Pool<Bullet> _playerBullets;
+    [SerializeField] private Pool<Bullet> _enemyBullets;
     [SerializeField] private Window _startScreen;
     [SerializeField] private Window _endGameScreen;
 
@@ -44,6 +46,8 @@ public class Game : MonoBehaviour
     {
         _endGameScreen.Close();
         _enemysPool.Clear();
+        _enemyBullets.Clear();
+        _playerBullets.Clear();
         StartGame();
     }
 

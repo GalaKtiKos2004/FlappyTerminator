@@ -62,10 +62,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5411189161018836303, guid: cd81f836454749a43ac89c39827d21a3, type: 3}
       propertyPath: m_Name
-      value: Bullet Variant
+      value: EnemyBullet
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -7288640545590610160, guid: cd81f836454749a43ac89c39827d21a3, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5411189161018836303, guid: cd81f836454749a43ac89c39827d21a3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -4853321469478510678}
   m_SourcePrefab: {fileID: 100100000, guid: cd81f836454749a43ac89c39827d21a3, type: 3}
+--- !u!1 &1073776958839841985 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5411189161018836303, guid: cd81f836454749a43ac89c39827d21a3, type: 3}
+  m_PrefabInstance: {fileID: 5043668379775082894}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-4853321469478510678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073776958839841985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40afaa69af8433a4ebbdfe9e97a9c11b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speedX: -5

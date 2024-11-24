@@ -5,7 +5,7 @@ public class Bullet : PoolableObject<Bullet>, IInteractable
 {
     [SerializeField] private float _speedX;
 
-    private void Awake()
+    private void OnEnable()
     {
         Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
         rigidbody.velocity = new Vector2(_speedX, rigidbody.velocity.y);

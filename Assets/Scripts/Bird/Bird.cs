@@ -37,13 +37,9 @@ public class Bird : MonoBehaviour
 
     private void Collision(IInteractable interactable)
     {
-        if (interactable is Enemy)
+        if (interactable is Enemy || interactable is Ground || interactable is EnemyBullet)
         {
             GameOver?.Invoke();
-        }
-        else if (interactable is ScoreZone)
-        {
-            _counter.Add();
         }
     }
 }

@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7288640545590610160, guid: cd81f836454749a43ac89c39827d21a3, type: 3}
+      propertyPath: _speedX
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1513563124976790774, guid: cd81f836454749a43ac89c39827d21a3, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -64,8 +68,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerBullet
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -7288640545590610160, guid: cd81f836454749a43ac89c39827d21a3, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5411189161018836303, guid: cd81f836454749a43ac89c39827d21a3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -1462254484612904494}
   m_SourcePrefab: {fileID: 100100000, guid: cd81f836454749a43ac89c39827d21a3, type: 3}
+--- !u!1 &356629530473400928 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5411189161018836303, guid: cd81f836454749a43ac89c39827d21a3, type: 3}
+  m_PrefabInstance: {fileID: 5758810298227150639}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-1462254484612904494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 356629530473400928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87c4269932adbfb4d89cb6314024dc6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speedX: 5
