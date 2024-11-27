@@ -8,14 +8,12 @@ public class Enemy : PoolableObject<Enemy>, IInteractable
 
     private BulletPool _bullets;
 
-    private bool _isDie;
-
     public event Action<Enemy> Died;
+    public event Action<Enemy> Released;
 
     public void Init(BulletPool bulletPool)
     {
         Debug.Log("Init Enemy");
-        _isDie = false;
         _bullets = bulletPool;
         StartCoroutine(FireWithInterval(new WaitForSeconds(_shotFrequency)));
     }
@@ -23,6 +21,11 @@ public class Enemy : PoolableObject<Enemy>, IInteractable
     public void Die()
     {
         Died?.Invoke(this);
+    }
+
+    public void Release()
+    {
+        Released?.Invoke(this);
     }
 
     private IEnumerator FireWithInterval(WaitForSeconds wait)

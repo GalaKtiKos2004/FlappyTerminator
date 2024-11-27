@@ -11,9 +11,6 @@ public abstract class Pool<T> : MonoBehaviour where T : PoolableObject<T>
 
     private ObjectPool<T> _pool;
 
-    protected ObjectPool<T> Objects => _pool;
-    protected List<T> CreatedObjects => _createdObjects;
-
     private void Awake()
     {
         _createdObjects = new List<T>();
@@ -35,7 +32,7 @@ public abstract class Pool<T> : MonoBehaviour where T : PoolableObject<T>
         return tObject;
     }
 
-    public void ReleaseObjects(T t)
+    public virtual void ReleaseObjects(T t)
     {
         if (_createdObjects.Contains(t))
         {
@@ -44,14 +41,12 @@ public abstract class Pool<T> : MonoBehaviour where T : PoolableObject<T>
         }
     }
 
-    public virtual void Clear()
+    public void Clear()
     {
-        foreach (T t in _createdObjects)
+        foreach (T t in _createdObjects.ToArray())
         {
-            _pool.Release(t);
+            ReleaseObjects(t);
         }
-
-        _createdObjects.Clear();
     }
 
     private T CreateObject() => Instantiate(_prefab);

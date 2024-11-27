@@ -56,6 +56,7 @@ public class EnemySpawner : MonoBehaviour
 
         Enemy enemy = _enemyPool.GetObjects();
         enemy.Died += OnEnemyDie;
+        enemy.Released += OnEnemyReleased;
         enemy.transform.position = spawnPoint;
         enemy.Init(_bulletPool);
         _enemies.Add(enemy);
@@ -64,9 +65,14 @@ public class EnemySpawner : MonoBehaviour
     private void OnEnemyDie(Enemy enemy)
     {
         Debug.Log("Enemy Die Handler");
-        enemy.Died -= OnEnemyDie;
         _enemyPool.ReleaseObjects(enemy);
         _enemies.Remove(enemy);
         Killed?.Invoke();
+    }
+
+    private void OnEnemyReleased(Enemy enemy)
+    {
+        enemy.Died -= OnEnemyDie;
+        enemy.Released -= OnEnemyReleased;
     }
 }
