@@ -25,29 +25,31 @@ public abstract class Pool<T> : MonoBehaviour where T : PoolableObject<T>
             maxSize: _poolMaxSize);
     }
 
-    public T GetObjects() => _pool.Get();
+    public T GetObjects()
+    {
+        T tObject = _pool.Get();
+        _createdObjects.Add(tObject);
+        return tObject;
+    }
 
     public void ReleaseObjects(T t)
     {
-        _pool.Release(t);
+        if (_createdObjects.Contains(t))
+        {
+            _pool.Release(t);
+            _createdObjects.Remove(t);
+        }
     }
 
     public void Clear()
     {
         foreach (T t in _createdObjects)
         {
-            Destroy(t.gameObject);
+            _pool.Release(t);
         }
 
-        _pool.Clear();
         _createdObjects.Clear();
     }
 
-    private T CreateObject()
-    {
-        T poolableObject = Instantiate(_prefab);
-        _createdObjects.Add(poolableObject);
-
-        return poolableObject;
-    }
+    private T CreateObject() => Instantiate(_prefab);
 }

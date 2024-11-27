@@ -24,9 +24,15 @@ public class BirdShooter : MonoBehaviour
 
     private void Shoot()
     {
-        Bullet bullet = _bulletPool.GetObjects();
+        PlayerBullet bullet = _bulletPool.GetObjects() as PlayerBullet;
+        bullet.Killed += ReleaseBullet;
         bullet.transform.position = transform.position;
-
         bullet.ChangeDirection(transform.right);
+    }
+
+    private void ReleaseBullet(PlayerBullet bullet)
+    {
+        bullet.Killed -= ReleaseBullet;
+        _bulletPool.ReleaseObjects(bullet);
     }
 }

@@ -6,22 +6,27 @@ public class Enemy : PoolableObject<Enemy>, IInteractable
 {
     [SerializeField] private float _shotFrequency;
 
-    private BulletPool _bulletPool;
+    private BulletPool _bullets;
+
+    private bool _isDie;
 
     public event Action<Enemy> Died;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out PlayerBullet bullet))
+        if (collision.TryGetComponent(out PlayerBullet _) && _isDie == false)
         {
-            _bulletPool.ReleaseObjects(bullet);
+            Debug.Log("Enemy die"); 
+            _isDie = true;
             Died?.Invoke(this);
         }
     }
 
     public void Init(BulletPool bulletPool)
     {
-        _bulletPool = bulletPool;
+        Debug.Log("Init Enemy");
+        _isDie = false;
+        _bullets = bulletPool;
         StartCoroutine(FireWithInterval(new WaitForSeconds(_shotFrequency)));
     }
 
@@ -36,7 +41,7 @@ public class Enemy : PoolableObject<Enemy>, IInteractable
 
     private void Shoot()
     {
-        Bullet bullet = _bulletPool.GetObjects();
+        Bullet bullet = _bullets.GetObjects();
         bullet.transform.position = transform.position;
     }
 }

@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -11,6 +13,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private BulletPool _bulletPool;
 
     private WaitForSeconds _wait;
+
+    public event Action Killed;
 
     private void Awake()
     {
@@ -37,7 +41,6 @@ public class EnemySpawner : MonoBehaviour
         Vector3 spawnPoint = new Vector3(transform.position.x, spawnPositionY, transform.position.z);
 
         Enemy enemy = _enemyPool.GetObjects();
-        Debug.Log("Spawn");
         enemy.Died += OnEnemyDie;
         enemy.transform.position = spawnPoint;
         enemy.Init(_bulletPool);
@@ -45,7 +48,9 @@ public class EnemySpawner : MonoBehaviour
 
     private void OnEnemyDie(Enemy enemy)
     {
+        Debug.Log("On Enemy Die");
         enemy.Died -= OnEnemyDie;
         _enemyPool.ReleaseObjects(enemy);
+        Killed?.Invoke();
     }
 }
