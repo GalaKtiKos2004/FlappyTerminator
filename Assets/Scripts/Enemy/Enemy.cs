@@ -12,22 +12,17 @@ public class Enemy : PoolableObject<Enemy>, IInteractable
 
     public event Action<Enemy> Died;
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent(out PlayerBullet _) && _isDie == false)
-        {
-            Debug.Log("Enemy die"); 
-            _isDie = true;
-            Died?.Invoke(this);
-        }
-    }
-
     public void Init(BulletPool bulletPool)
     {
         Debug.Log("Init Enemy");
         _isDie = false;
         _bullets = bulletPool;
         StartCoroutine(FireWithInterval(new WaitForSeconds(_shotFrequency)));
+    }
+
+    public void Die()
+    {
+        Died?.Invoke(this);
     }
 
     private IEnumerator FireWithInterval(WaitForSeconds wait)

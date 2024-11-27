@@ -6,6 +6,7 @@ public class Game : MonoBehaviour
     [SerializeField] private Pool<Enemy> _enemysPool;
     [SerializeField] private Pool<Bullet> _playerBullets;
     [SerializeField] private Pool<Bullet> _enemyBullets;
+    [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private Window _startScreen;
     [SerializeField] private Window _endGameScreen;
 
@@ -34,6 +35,7 @@ public class Game : MonoBehaviour
     {
         _endGameScreen.Open();
         Time.timeScale = 0;
+        _enemySpawner.ClearEnemys();
     }
 
     private void OnPlayButtonClick()

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -14,16 +15,29 @@ public class EnemySpawner : MonoBehaviour
 
     private WaitForSeconds _wait;
 
+    private List<Enemy> _enemies;
+
     public event Action Killed;
 
     private void Awake()
     {
         _wait = new WaitForSeconds(_delay);
+        _enemies = new List<Enemy>();
     }
 
     private void Start()
     {
         StartCoroutine(GeneratePipes());
+    }
+
+    public void ClearEnemys()
+    {
+        foreach (Enemy enemy in _enemies)
+        {
+            enemy.Died -= OnEnemyDie;
+        }
+
+        _enemies.Clear();
     }
 
     private IEnumerator GeneratePipes()
@@ -44,13 +58,15 @@ public class EnemySpawner : MonoBehaviour
         enemy.Died += OnEnemyDie;
         enemy.transform.position = spawnPoint;
         enemy.Init(_bulletPool);
+        _enemies.Add(enemy);
     }
 
     private void OnEnemyDie(Enemy enemy)
     {
-        Debug.Log("On Enemy Die");
+        Debug.Log("Enemy Die Handler");
         enemy.Died -= OnEnemyDie;
         _enemyPool.ReleaseObjects(enemy);
+        _enemies.Remove(enemy);
         Killed?.Invoke();
     }
 }

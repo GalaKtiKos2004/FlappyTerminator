@@ -11,6 +11,9 @@ public abstract class Pool<T> : MonoBehaviour where T : PoolableObject<T>
 
     private ObjectPool<T> _pool;
 
+    protected ObjectPool<T> Objects => _pool;
+    protected List<T> CreatedObjects => _createdObjects;
+
     private void Awake()
     {
         _createdObjects = new List<T>();
@@ -41,7 +44,7 @@ public abstract class Pool<T> : MonoBehaviour where T : PoolableObject<T>
         }
     }
 
-    public void Clear()
+    public virtual void Clear()
     {
         foreach (T t in _createdObjects)
         {
